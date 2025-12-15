@@ -115,6 +115,16 @@ pub fn build(b: *std.Build) void {
 
     const ethereumjs_setup_step = b.step("setup-ethereumjs", "Setup the ethereumjs runner");
     ethereumjs_setup_step.dependOn(&ethereumjs_setup.step);
+
+    // Setup evmone runner (copy shell script)
+    const evmone_setup = b.addSystemCommand(&[_][]const u8{
+        "sh", "-c",
+        "mkdir -p zig-out/bin && chmod +x src/evmone_runner.sh && cp src/evmone_runner.sh zig-out/bin/evmone-runner",
+    });
+    evmone_setup.step.name = "Setup evmone runner";
+
+    const evmone_setup_step = b.step("setup-evmone", "Setup the evmone runner");
+    evmone_setup_step.dependOn(&evmone_setup.step);
     // It's also possible to define more custom flags to toggle optional features
     // of this build script using `b.option()`. All defined flags (including
     // target and optimize options) will be listed when running `zig build --help`
@@ -190,6 +200,7 @@ pub fn build(b: *std.Build) void {
     exe.step.dependOn(&geth_runner_build.step);
     exe.step.dependOn(&py_evm_setup.step);
     exe.step.dependOn(&ethereumjs_setup.step);
+    exe.step.dependOn(&evmone_setup.step);
     // Link with guillotine foundry compiler
     exe.root_module.addIncludePath(b.path("guillotine/lib/foundry-compilers"));
     // Determine the correct target directory based on the build target

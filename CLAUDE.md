@@ -55,6 +55,7 @@ The suite currently benchmarks 10+ different EVM implementations/configurations 
    - `src/py_evm_runner.py` - Python EVM implementation
    - `src/ethereumjs_runner.js` - EthereumJS implementation
    - `src/pyrevm_runner.py` - Python REVM bindings (not yet integrated)
+   - `src/evmone_runner.sh` - evmone (C++) via evmc CLI tool
 
 3. **Fixtures** (`fixtures/`)
    - 34 JSON configuration files defining benchmark scenarios

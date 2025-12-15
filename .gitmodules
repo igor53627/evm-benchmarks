@@ -19,3 +19,6 @@
 [submodule "pyrevm"]
 	path = pyrevm
 	url = https://github.com/paradigmxyz/pyrevm.git
+[submodule "evmone"]
+	path = evmone
+	url = https://github.com/ipsilon/evmone
